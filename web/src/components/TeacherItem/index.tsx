@@ -3,34 +3,56 @@ import React from 'react';
 import whatsappIcon from '../../assets/images/icons/whatsapp.svg'
 
 import './styles.css';
+import api from '../../services/api';
 
-export default function TeacherItem() {
+export interface Teacher {
+  avatar: string;
+  bio: string;
+  name: string;
+  cost: number;
+  id: number;
+  subject: string;
+  whatsapp: string;  
+}
+
+export interface TeacherItemProps {
+  teacher: Teacher
+}
+
+const TeacherItem: React.FC<TeacherItemProps> = ({ teacher }) => {
+
+  function createNewConnection() {
+    api.post('connections', {
+      user_id: teacher.id
+    })
+  }
+
   return(
     <article className="teacher-item">
       <header>
-        <img src="https://avatars0.githubusercontent.com/u/50683117?s=460&u=6309d686373e0c23d26b7f3783e77a4f2b79b34c&v=4" alt="Fábio José"/>
+        <img src={teacher.avatar} alt={teacher.name}/>
         <div>
-          <strong>Fábio José</strong>
-          <span>Programação</span>
+          <strong>{teacher.name}</strong>
+          <span>{teacher.subject}</span>
         </div>
       </header>
 
       <p>
-        Entusiasta das melhores tecnologias do mercado de desenvolvimento Front-end.
-        <br /><br />
-        React, React Native e Gatsby.
+        {teacher.bio}
       </p>
 
       <footer>
         <p>
           Preço/hora
-          <strong>R$ 30,00</strong>
+          <strong>R$ {teacher.cost}</strong>
         </p>
-        <button type="button">
+        <a target="_blank" onClick={createNewConnection} href={`https://wa.me/${teacher.whatsapp}`}>
           <img src={whatsappIcon} alt="Whatsapp"/>
           Entrar em contato
-        </button>
+        </a>
       </footer>
     </article>
   )
 }
+
+export default TeacherItem;
