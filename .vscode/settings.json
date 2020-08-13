@@ -1,5 +1,8 @@
 {
   "cSpell.words": [
+    "archivo",
+    "archivo bold",
+    "bold",
     "downlevel",
     "downlevel iteration",
     "iteration",
@@ -8,6 +11,9 @@
     "sourcemap",
     "tslib",
     "tsnd",
-    "typechecking"
+    "typechecking",
+    "unfavorite",
+    "favorited",
+    "borderless"
   ]
 }
